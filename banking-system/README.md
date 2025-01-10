@@ -172,4 +172,11 @@
 * Подготовка инструкций по развертыванию
 
 # fyi
+
+### Порядок запуска:
+* config-server
+* eureka-server
+* gateway-api
+
+### !
 * Открыть Eureka Dashboard: http://localhost:8761
