@@ -20,7 +20,7 @@ public class Client {
     @Column(name ="Full_name", length = 50, nullable = false)
     private String fullName;
 
-    @Column(name = "Date_of_birth")
+    @Column(name = "Date_of_birth" , nullable = false)
     private LocalDate dob;
 
     @Column(name = "Passport_number", length = 14, nullable = false, unique = true) // остальное в другой таблице
