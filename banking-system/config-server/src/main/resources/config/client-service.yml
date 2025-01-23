@@ -1,2 +1,6 @@
 server:
   port: 5050
+  datasource:
+    url: jdbc:postgresql://localhost:4444/clientService
+    password: 'postgres'
+    username: 'postgres'

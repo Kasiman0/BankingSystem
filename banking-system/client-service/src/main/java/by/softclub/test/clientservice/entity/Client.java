@@ -29,7 +29,7 @@ public class Client {
     @Column(length = 20, nullable = false, unique = true)
     private String email;
 
-    @Column(name = "Phone_Number", length = 13, unique = true)
+    @Column(name = "Phone_Number", length = 13, nullable = false, unique = true)
     private String phoneNumber;
 
     @Column(name = "Postal_Code", length = 6)

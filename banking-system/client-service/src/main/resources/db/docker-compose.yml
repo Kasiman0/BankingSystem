@@ -1,0 +1,17 @@
+services:
+  postgres:
+    container_name: client_server
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DATA: /data/postgres
+      POSTGRES_DB: clientService
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "4444:5432"
+    restart: unless-stopped
+
+volumes:
+  postgres:
