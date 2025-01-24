@@ -29,7 +29,7 @@ public class Client {
     @Column(length = 20, nullable = false, unique = true)
     private String email;
 
-    @Column(name = "Phone_Number", length = 13, nullable = false, unique = true)
+    @Column(name = "Phone_number", length = 13, nullable = false, unique = true)
     private String phoneNumber;
 
     @Column(name = "Postal_Code", length = 6)
@@ -38,10 +38,10 @@ public class Client {
     @Column(length = 100)
     private String address;
 
-    @Column(name = "Client_Status", nullable = false)
+    @Column(name = "Client_status", nullable = false)
     private ClientStatus clientStatus;
 
-    @Column(name = "Registration_Date")
+    @Column(name = "Registration_date")
     private LocalDate registrationDate;
 
     //история изменений тоже другая таблица?
