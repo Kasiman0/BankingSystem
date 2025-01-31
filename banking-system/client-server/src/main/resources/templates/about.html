@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+</head>
+<body>
+
+<header th:insert="~{bloks/header.html}"> </header>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<br>
+<div class="wrapper">
+    <div class="col-md-8 offset-md-4">
+        <h3>
+            Базовый сервис для работы с клиентами банка
+        </h3>
+        <br>
+        <b> Функциональные требования: </b>
+        <li>    CRUD операции для клиентов банка </li>
+        <li>    Поиск клиентов по различным параметрам</li>
+        <li>    Валидация данных клиента </li>
+        <li>  Проверка на дубликаты по ключевым полям </li>
+        <li> Управление статусами клиентов </li>
+        <li>Ведение истории изменений данных клиента</li>
+        <br>
+        <b> Структура данных клиента: </b>
+        <br>
+        <li>ID</li>
+        <li>Имя, Фамилия, Отчество</li>
+        <li>Дата рождения</li>
+        <br>
+        <li> Паспортные данные</li>
+        <dl>Серия и номер</dl>
+        <dl>Дата выдачи</dl>
+        <dl>Кем выдан</dl>
+        <dl>Код подразделения</dl>
+        <br>
+        <li>Контактная информация</li>
+        <li>Email (уникальный)</li>
+        <li>Телефон (уникальный)</li>
+        <br>
+        <li>Адрес регистрации</li>
+        <dl>Индекс</dl>
+        <dl>Регион</dl>
+        <dl>Город</dl>
+        <dl>Улица</dl>
+        <dl>Дом, квартира</dl>
+        <li>Статус клиента (ACTIVE, BLOCKED, SUSPENDED)</li>
+        <li>Дата регистрации в системе</li>
+        <li>История изменений</li>
+    </div>
+</div>
+</body>
+</html>

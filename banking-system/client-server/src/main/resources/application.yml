@@ -1,0 +1,43 @@
+spring:
+
+  application:
+    name: client-service
+  #config:
+  #  import: configserver:${CONFIG_URL:http://localhost:8888}
+
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/master.xml
+  docker:
+    compose:
+      enabled: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/system
+    #jdbc:postgresql://localhost:5432/system
+    #url: jdbc:postgresql://client-service:5432/system
+    password: 'postgres'
+    username: 'postgres'
+  jpa:
+    hibernate:
+      #ddl-auto: update
+    show-sql: true
+
+server:
+  port: 8089
+
+
+springdoc:
+  swagger-ui:
+    syntaxHighlight:
+      activated: false
+      theme: null
+    urls-primary-name: CLIENT_API
+    path: /swagger-ui.html
+  api-docs:
+    enabled: true
+
+
+
+
+
