@@ -10,7 +10,7 @@ CREATE table Clients (
     Client_status VARCHAR(10) NOT NULL DEFAULT 'ACTIVE',
     Registration_date DATE
 );
-ALTER TABLE Clients
-ADD CONSTRAINT clientStatuses
-CHECK ( Сlient_status IN ('ACTIVE', 'BLOCKED', 'SUSPENDED') );
 
+ALTER TABLE Clients
+    ADD CONSTRAINT clientStatuses
+        CHECK ( client_status IN ('ACTIVE', 'BLOCKED', 'SUSPENDED') );
