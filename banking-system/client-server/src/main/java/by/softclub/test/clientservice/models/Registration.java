@@ -16,6 +16,6 @@ public class Registration {
     private String region;
     @Column(name = "city")
     private String city;
-    @Column(name = "houseFlatName")
+    @Column(name = "house_flat_name")
     private String houseFlatName;
 }
