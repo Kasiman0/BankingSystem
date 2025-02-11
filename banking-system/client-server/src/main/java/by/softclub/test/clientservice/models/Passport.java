@@ -12,12 +12,12 @@ public class Passport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name = "SeriesAndNumber")
+    @Column(name = "series_and_number")
     private String SeriesAndNumber;
-    @Column(name = "issueData")
+    @Column(name = "issue_data")
     private LocalDate issueData;
-    @Column(name = " byWhomIssued")
+    @Column(name = "by_whom_issued")
     private String byWhomIssued;
-    @Column(name = "unitCode")
+    @Column(name = "unit_code")
     private String unitCode;
 }
