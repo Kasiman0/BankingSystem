@@ -20,7 +20,7 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
             "(:phoneNumber IS NULL OR c.phoneNumber LIKE CONCAT('%', :phoneNumber, '%')) AND " +
             "(:postalCode IS NULL OR c.postalCode LIKE CONCAT('%', :postalCode, '%')) AND " +
             "(:address IS NULL OR LOWER(c.address) LIKE LOWER(CONCAT('%', :address, '%'))) AND " +
-            "(:clientStatus IS NULL OR LOWER(c.clientStatus) LIKE LOWER(CONCAT('%', :clientStatus, '%')))")
+            "(:clientStatus IS NULL OR c.clientStatus = :clientStatus)")
     List<Client> findByFilters(@Param("fullName") String fullName,
                                @Param("dobFrom") LocalDate dobFrom,
                                @Param("dobTo") LocalDate dobTo,

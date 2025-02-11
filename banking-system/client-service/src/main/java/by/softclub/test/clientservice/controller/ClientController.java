@@ -43,7 +43,7 @@ public class ClientController {
             @RequestParam(required = false) String postalCode,
             @RequestParam(required = false) String address,
             @RequestParam(required = false) ClientStatus clientStatus,
-            @RequestParam(defaultValue = "full_name") String sortBy,
+            @RequestParam(defaultValue = "fullName") String sortBy,
             @RequestParam(defaultValue = "ASC") String sortDirection
             ) {
         return ResponseEntity.ok(clientService.getClients(fullName, dobFrom, dobTo, passportNumber, email, phoneNumber,
