@@ -1,5 +1,6 @@
 package by.softclub.test.clientservice.service;
 
+import by.softclub.test.clientservice.dto.ClientRegistrationRequest;
 import by.softclub.test.clientservice.dto.ClientRequest;
 import by.softclub.test.clientservice.entity.Client;
 import by.softclub.test.clientservice.entity.ClientStatus;
@@ -21,7 +22,7 @@ public class ClientService {
     }
 
     @Transactional
-    public Client createClient(ClientRequest request) {
+    public Client createClient(ClientRegistrationRequest request) {
         //пока без валидации
         Client client = new Client();
         client.setFullName(request.getFullName());
@@ -31,7 +32,8 @@ public class ClientService {
         client.setPhoneNumber(request.getPhoneNumber());
         client.setPostalCode(request.getPostalCode());
         client.setAddress(request.getAddress());
-        client.setClientStatus(request.getClientStatus());
+        client.setClientStatus(ClientStatus.ACTIVE);
+        client.setRegistrationDate(LocalDate.now());
         return clientRepository.save(client);
     }
 

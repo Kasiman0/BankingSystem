@@ -1,6 +1,7 @@
 package by.softclub.test.clientservice.controller;
 
 
+import by.softclub.test.clientservice.dto.ClientRegistrationRequest;
 import by.softclub.test.clientservice.dto.ClientRequest;
 import by.softclub.test.clientservice.entity.Client;
 import by.softclub.test.clientservice.entity.ClientStatus;
@@ -27,7 +28,7 @@ public class ClientController {
     public ClientController(ClientService clientService) {this.clientService = clientService;}
 
     @PostMapping
-    public ResponseEntity<Client> createClient(@Valid @RequestBody ClientRequest request)
+    public ResponseEntity<Client> createClient(@Valid @RequestBody ClientRegistrationRequest request)
     {
         return ResponseEntity.ok(clientService.createClient(request));
     }
