@@ -21,6 +21,9 @@ public class ClientService {
 
     @Autowired
     private ClientMapper clientMapper;
+    private String username;
+    private String email;
+    private String telephone;
 
 
     public List<ClientDto> readAll() {
@@ -42,7 +45,14 @@ public class ClientService {
     }
 
 
+    public void addClient() {
+        addClient((String) null, (String) null, (String) null);
+    }
+
     public void addClient(String username, String email, String telephone) {
+        this.username = username;
+        this.email = email;
+        this.telephone = telephone;
         ZoneId zone = ZoneId.of("Belarus/Minsk");
         LocalDate today = LocalDate.now(zone);
         Client client = new Client();
@@ -55,16 +65,18 @@ public class ClientService {
         clientRepository.save(client);
 
     }
-
-
-    public void addClient(String email, String username) {
+/*
+public void addClient(String email, String username, String telephone) {
         //  ZoneId zone = ZoneId.of("Belarus/Minsk");
         // LocalDate today = LocalDate.now(zone);
         //  Statuses status = new Statuses(1);
         Client client = new Client();
         client.setUsername(username);
         client.setEmail(email);
+        client.setTelephone(telephone);
         //  client.setStatus(status);
         clientRepository.save(client);
-    }
+
+}
+ */
 }
