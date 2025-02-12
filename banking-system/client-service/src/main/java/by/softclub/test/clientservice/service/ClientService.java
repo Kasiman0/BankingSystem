@@ -1,6 +1,5 @@
 package by.softclub.test.clientservice.service;
 
-import by.softclub.test.clientservice.dto.ClientRegistrationRequest;
 import by.softclub.test.clientservice.dto.ClientRequest;
 import by.softclub.test.clientservice.entity.Client;
 import by.softclub.test.clientservice.entity.ClientStatus;
@@ -22,8 +21,16 @@ public class ClientService {
     }
 
     @Transactional
-    public Client createClient(ClientRegistrationRequest request) {
-        //пока без валидации
+    public Client createClient(ClientRequest request) {
+        if (clientRepository.existsByPassportNumber(request.getPassportNumber())) {
+            throw new RuntimeException("Client with this passport number already exists");
+        }
+        if (clientRepository.existsByPhoneNumber(request.getPhoneNumber())) {
+            throw new RuntimeException("Client with this phone number already exists");
+        }
+        if (clientRepository.existsByEmail(request.getEmail())) {
+            throw new RuntimeException("Client with this email already exists");
+        }
         Client client = new Client();
         client.setFullName(request.getFullName());
         client.setDob(LocalDate.parse(request.getDob()));

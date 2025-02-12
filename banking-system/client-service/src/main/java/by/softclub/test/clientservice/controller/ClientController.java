@@ -1,7 +1,6 @@
 package by.softclub.test.clientservice.controller;
 
 
-import by.softclub.test.clientservice.dto.ClientRegistrationRequest;
 import by.softclub.test.clientservice.dto.ClientRequest;
 import by.softclub.test.clientservice.entity.Client;
 import by.softclub.test.clientservice.entity.ClientStatus;
@@ -11,7 +10,6 @@ import jakarta.validation.Valid;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.time.LocalDate;
@@ -28,7 +26,7 @@ public class ClientController {
     public ClientController(ClientService clientService) {this.clientService = clientService;}
 
     @PostMapping
-    public ResponseEntity<Client> createClient(@Valid @RequestBody ClientRegistrationRequest request)
+    public ResponseEntity<Client> createClient(@Valid @RequestBody ClientRequest request)
     {
         return ResponseEntity.ok(clientService.createClient(request));
     }

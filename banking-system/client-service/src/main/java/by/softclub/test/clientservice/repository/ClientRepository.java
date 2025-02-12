@@ -31,4 +31,10 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
                                @Param("address") String address,
                                @Param("clientStatus") ClientStatus clientStatus,
                                Sort sort);
+
+    boolean existsByPassportNumber(String passportNumber);
+
+    boolean existsByEmail(String email);
+
+    boolean existsByPhoneNumber(String phoneNumber);
 }
