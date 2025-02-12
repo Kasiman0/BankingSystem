@@ -2,7 +2,6 @@ package by.softclub.test.clientservice.service;
 
 import by.softclub.test.clientservice.dto.ClientDto;
 import by.softclub.test.clientservice.models.Client;
-import by.softclub.test.clientservice.models.Registration;
 import by.softclub.test.clientservice.repo.ClientRepository;
 import by.softclub.test.clientservice.utils.ClientMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,16 +42,16 @@ public class ClientService {
     }
 
 
-    public void addClient(String username, LocalDate birthDate, Long passport_id, String email, String telephone, Registration registration) {
+    public void addClient(String username, String email, String telephone) {
         ZoneId zone = ZoneId.of("Belarus/Minsk");
         LocalDate today = LocalDate.now(zone);
         Client client = new Client();
         client.setUsername(username);
-        client.setBday(birthDate);
-        client.setPassport_id(passport_id);
+        //client.setBday(birthDate);
+        //client.setPassport_id(Long.valueOf(passport_id));
         client.setEmail(email);
         client.setTelephone(telephone);
-        client.setRegistration(registration);
+        //client.setRegistration(registration);
         clientRepository.save(client);
 
     }

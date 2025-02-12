@@ -2,6 +2,7 @@ package by.softclub.test.clientservice.controllers;
 
 
 import by.softclub.test.clientservice.dto.ClientDto;
+import by.softclub.test.clientservice.models.Registration;
 import by.softclub.test.clientservice.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 
 @Controller
 public class ClientController {
@@ -19,7 +23,8 @@ public class ClientController {
     private ClientService clientService;
 
    @PostMapping(value = "/check_login")
-    public String checkLogin(@RequestParam String email, @RequestParam String telephone, Model model) {
+    public String checkLogin(@RequestParam String email,
+                             @RequestParam String telephone, Model model) {
 
 
        return "about"; }
@@ -42,8 +47,14 @@ public class ClientController {
 
     //  Обработка формы ввода пользователя
     @PostMapping(value = "/add_client")
-    public String addClient(@RequestParam String email, @RequestParam String username, Model model) {
-            clientService.addClient(email, username);
+    public String addClient(@RequestParam String email,
+                            @RequestParam String username,
+                            @RequestParam String telephone,
+                            //@RequestParam LocalDate birthDate,
+                            //@RequestParam String passport_id,
+                           // @RequestParam Registration registration,
+                            Model model) {
+            clientService.addClient(email, username, telephone);
         return "redirect:/";
     }
 
