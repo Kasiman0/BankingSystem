@@ -1,11 +1,6 @@
 package by.softclub.test.clientservice.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -38,6 +33,7 @@ public class Client {
     @Column(length = 100)
     private String address;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "Client_status", nullable = false)
     private ClientStatus clientStatus;
 

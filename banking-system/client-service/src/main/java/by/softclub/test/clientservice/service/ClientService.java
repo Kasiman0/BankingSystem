@@ -26,7 +26,7 @@ public class ClientService {
         //пока без валидации
         Client client = new Client();
         client.setFullName(request.getFullName());
-        client.setDob(request.getDob());
+        client.setDob(LocalDate.parse(request.getDob()));
         client.setPassportNumber(request.getPassportNumber());
         client.setEmail(request.getEmail());
         client.setPhoneNumber(request.getPhoneNumber());

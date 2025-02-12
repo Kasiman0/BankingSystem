@@ -12,7 +12,7 @@ public class ClientRegistrationRequest {
     private String fullName;
 
     @NotEmpty
-    private LocalDate dob;
+    private String dob;
 
     @NotEmpty
     @Size(max = 14)
@@ -35,8 +35,8 @@ public class ClientRegistrationRequest {
     public String getFullName() { return fullName; }
     public void setFullName(String fullName) { this.fullName = fullName; }
 
-    public LocalDate getDob() { return dob; }
-    public void setDob(LocalDate dob) { this.dob = dob; }
+    public String getDob() { return dob; }
+    public void setDob(String dob) { this.dob = dob; }
 
     public String getPassportNumber() { return passportNumber; }
     public void setPassportNumber(String passportNumber) { this.passportNumber = passportNumber; }
