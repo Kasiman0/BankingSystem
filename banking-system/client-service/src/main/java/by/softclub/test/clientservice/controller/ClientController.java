@@ -1,16 +1,18 @@
 package by.softclub.test.clientservice.controller;
 
 
-import by.softclub.test.clientservice.dto.ClientRequest;
+import by.softclub.test.clientservice.dto.ClientCreateRequest;
+import by.softclub.test.clientservice.dto.ClientUpdateRequest;
 import by.softclub.test.clientservice.entity.Client;
 import by.softclub.test.clientservice.entity.ClientStatus;
 import by.softclub.test.clientservice.service.ClientService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -25,12 +27,20 @@ public class ClientController {
 
     public ClientController(ClientService clientService) {this.clientService = clientService;}
 
+    @Operation(
+            summary = "Create",
+            description = "Создает и вносит нового клиента в бд"
+    )
     @PostMapping
-    public ResponseEntity<Client> createClient(@Valid @RequestBody ClientRequest request)
+    public ResponseEntity<Client> createClient(@Valid @RequestBody ClientCreateRequest request)
     {
         return ResponseEntity.ok(clientService.createClient(request));
     }
 
+    @Operation(
+            summary = "Read",
+            description = "Находит в бд клиентов с указанными параметрами"
+    )
     @GetMapping
     public ResponseEntity<List<Client>> getClients (
             @RequestParam(required = false) String fullName,
@@ -47,5 +57,15 @@ public class ClientController {
             ) {
         return ResponseEntity.ok(clientService.getClients(fullName, dobFrom, dobTo, passportNumber, email, phoneNumber,
                                                           postalCode, address, clientStatus, sortBy, sortDirection));
+    }
+
+    @Operation(
+            summary = "Update",
+            description = "Обновляет поля клиентов в бд"
+    )
+    @PostMapping
+    public ResponseEntity<Client> updateClient(@Valid @RequestBody ClientUpdateRequest request)
+    {
+        return ResponseEntity.ok(clientService.updateClient(request));
     }
 }

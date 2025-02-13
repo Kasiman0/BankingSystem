@@ -1,10 +1,12 @@
 package by.softclub.test.clientservice.service;
 
-import by.softclub.test.clientservice.dto.ClientRequest;
+import by.softclub.test.clientservice.dto.ClientCreateRequest;
+import by.softclub.test.clientservice.dto.ClientUpdateRequest;
 import by.softclub.test.clientservice.entity.Client;
 import by.softclub.test.clientservice.entity.ClientStatus;
 import by.softclub.test.clientservice.repository.ClientRepository;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +23,7 @@ public class ClientService {
     }
 
     @Transactional
-    public Client createClient(ClientRequest request) {
+    public Client createClient(ClientCreateRequest request) {
         if (clientRepository.existsByPassportNumber(request.getPassportNumber())) {
             throw new RuntimeException("Client with this passport number already exists");
         }
@@ -54,5 +56,32 @@ public class ClientService {
         }
         return clientRepository.findByFilters(fullName, dobFrom, dobTo, passportNumber, email, phoneNumber,
                 postalCode, address, clientStatus, sort);
+    }
+
+    @Transactional
+    public Client updateClient(ClientUpdateRequest request) {
+        if(!clientRepository.existsById(request.getId())) {
+            throw new RuntimeException("Client with this id does not exist");
+        }
+        Client client = clientRepository.findById(request.getId());
+        if(request.getFullName() != null) {
+            client.setFullName(request.getFullName());
+        }
+        if(request.getEmail() != null) {
+            client.setEmail(request.getEmail());
+        }
+        if(request.getPhoneNumber() != null) {
+            client.setPhoneNumber(request.getPhoneNumber());
+        }
+        if(request.getPostalCode() != null) {
+            client.setPostalCode(request.getPostalCode());
+        }
+        if(request.getAddress() != null) {
+            client.setAddress(request.getAddress());
+        }
+        if(request.getStatus()!= null) {
+            client.setClientStatus(request.getStatus());
+        }
+        return clientRepository.save(client);
     }
 }

@@ -1,22 +1,17 @@
 package by.softclub.test.clientservice.dto;
 
+import by.softclub.test.clientservice.entity.ClientStatus;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
-import java.time.LocalDate;
+public class ClientUpdateRequest {
 
-public class ClientRequest {
+    @NotEmpty
+    private long id;
 
     @NotEmpty
     @Size(max = 50)
     private String fullName;
-
-    @NotEmpty
-    private String dob;
-
-    @NotEmpty
-    @Size(max = 14)
-    private String passportNumber;
 
     @NotEmpty
     @Size(max = 20)
@@ -32,14 +27,13 @@ public class ClientRequest {
     @Size(max = 100)
     private String address;
 
+    private ClientStatus status;
+
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
+
     public String getFullName() { return fullName; }
     public void setFullName(String fullName) { this.fullName = fullName; }
-
-    public String getDob() { return dob; }
-    public void setDob(String dob) { this.dob = dob; }
-
-    public String getPassportNumber() { return passportNumber; }
-    public void setPassportNumber(String passportNumber) { this.passportNumber = passportNumber; }
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
@@ -53,4 +47,6 @@ public class ClientRequest {
     public String getAddress() { return address; }
     public void setAddress(String address) { this.address = address; }
 
+    public ClientStatus getStatus() { return status; }
+    public void setStatus(ClientStatus status) { this.status = status; }
 }
