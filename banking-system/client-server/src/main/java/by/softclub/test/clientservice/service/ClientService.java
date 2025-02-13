@@ -53,7 +53,7 @@ public class ClientService {
         this.username = username;
         this.email = email;
         this.telephone = telephone;
-        ZoneId zone = ZoneId.of("Belarus/Minsk");
+        ZoneId zone = ZoneId.of("Europe/Minsk");
         LocalDate today = LocalDate.now(zone);
         Client client = new Client();
         client.setUsername(username);
