@@ -31,7 +31,7 @@ public class ClientController {
             summary = "Create",
             description = "Создает и вносит нового клиента в бд"
     )
-    @PostMapping
+    @PostMapping("/new")
     public ResponseEntity<Client> createClient(@Valid @RequestBody ClientCreateRequest request)
     {
         return ResponseEntity.ok(clientService.createClient(request));
@@ -63,7 +63,7 @@ public class ClientController {
             summary = "Update",
             description = "Обновляет поля клиентов в бд"
     )
-    @PostMapping
+    @PostMapping("/update")
     public ResponseEntity<Client> updateClient(@Valid @RequestBody ClientUpdateRequest request)
     {
         return ResponseEntity.ok(clientService.updateClient(request));
