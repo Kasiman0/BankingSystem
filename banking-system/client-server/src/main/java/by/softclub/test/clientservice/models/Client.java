@@ -5,7 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 
 @Entity
@@ -26,9 +30,6 @@ public class Client {
     @Column(name = "Bday") //Дата рождения
     private LocalDate bday;
 
-    @Column(name = "passport_id")
-    private Long passport_id;
-
     @Column(name = "email")
     private String email;
 
@@ -42,6 +43,7 @@ public class Client {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "status_id")
     private Statuses status;
+
 
     @Column(name = "registration_date")
     private LocalDate registrationDate;

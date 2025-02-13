@@ -56,6 +56,7 @@ public class ClientService {
         ZoneId zone = ZoneId.of("Europe/Minsk");
         LocalDate today = LocalDate.now(zone);
         Client client = new Client();
+        client.setRegistrationDate(today);
         client.setUsername(username);
         client.setBday(birthDate);
         //client.setPassport_id(Long.valueOf(passport_id));
