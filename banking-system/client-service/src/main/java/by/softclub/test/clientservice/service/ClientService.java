@@ -84,4 +84,12 @@ public class ClientService {
         }
         return clientRepository.save(client);
     }
+
+    @Transactional
+    public void deleteClient(Long id) {
+        if(!clientRepository.existsById(id)) {
+            throw new RuntimeException("Client with this id does not exist");
+        }
+        clientRepository.deleteById(id);
+    }
 }
