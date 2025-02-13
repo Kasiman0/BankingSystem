@@ -2,9 +2,12 @@ package by.softclub.test.clientservice.service;
 
 import by.softclub.test.clientservice.dto.ClientCreateRequest;
 import by.softclub.test.clientservice.dto.ClientUpdateRequest;
+import by.softclub.test.clientservice.entity.ChangeHistory;
+import by.softclub.test.clientservice.entity.ChangeType;
 import by.softclub.test.clientservice.entity.Client;
 import by.softclub.test.clientservice.entity.ClientStatus;
 import by.softclub.test.clientservice.repository.ClientRepository;
+import by.softclub.test.clientservice.repository.HistoryRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Sort;
@@ -17,9 +20,11 @@ import java.util.List;
 public class ClientService {
 
     private final ClientRepository clientRepository;
+    private final HistoryRepository historyRepository;
 
-    public ClientService(ClientRepository clientRepository) {
+    public ClientService(ClientRepository clientRepository, HistoryRepository historyRepository) {
         this.clientRepository = clientRepository;
+        this.historyRepository = historyRepository;
     }
 
     @Transactional
@@ -43,6 +48,13 @@ public class ClientService {
         client.setAddress(request.getAddress());
         client.setClientStatus(ClientStatus.ACTIVE);
         client.setRegistrationDate(LocalDate.now());
+
+        ChangeHistory changeHistory = new ChangeHistory();
+        changeHistory.setType(ChangeType.C);
+        changeHistory.setClientId(client.getId());
+        changeHistory.setChangeDate(client.getRegistrationDate());
+        historyRepository.save(changeHistory);
+
         return clientRepository.save(client);
     }
 
@@ -64,22 +76,52 @@ public class ClientService {
             throw new RuntimeException("Client with this id does not exist");
         }
         Client client = clientRepository.findById(request.getId());
+
+        ChangeHistory changeHistory = new ChangeHistory();
+        changeHistory.setType(ChangeType.U);
+        changeHistory.setClientId(client.getId());
+        changeHistory.setChangeDate(LocalDate.now());
+
         if(request.getFullName() != null) {
+            changeHistory.setColumnName("full_name");
+            changeHistory.setOldValue(client.getFullName());
+            changeHistory.setNewValue(request.getFullName());
+            historyRepository.save(changeHistory);
             client.setFullName(request.getFullName());
         }
         if(request.getEmail() != null) {
+            changeHistory.setColumnName("email");
+            changeHistory.setOldValue(client.getEmail());
+            changeHistory.setNewValue(request.getEmail());
+            historyRepository.save(changeHistory);
             client.setEmail(request.getEmail());
         }
         if(request.getPhoneNumber() != null) {
+            changeHistory.setColumnName("phone_number");
+            changeHistory.setOldValue(client.getPhoneNumber());
+            changeHistory.setNewValue(request.getPhoneNumber());
+            historyRepository.save(changeHistory);
             client.setPhoneNumber(request.getPhoneNumber());
         }
         if(request.getPostalCode() != null) {
+            changeHistory.setColumnName("postal_code");
+            changeHistory.setOldValue(client.getPostalCode());
+            changeHistory.setNewValue(request.getPostalCode());
+            historyRepository.save(changeHistory);
             client.setPostalCode(request.getPostalCode());
         }
         if(request.getAddress() != null) {
+            changeHistory.setColumnName("address");
+            changeHistory.setOldValue(client.getAddress());
+            changeHistory.setNewValue(request.getAddress());
+            historyRepository.save(changeHistory);
             client.setAddress(request.getAddress());
         }
         if(request.getStatus()!= null) {
+            changeHistory.setColumnName("status");
+            changeHistory.setOldValue(client.getClientStatus().toString());
+            changeHistory.setNewValue(request.getStatus().toString());
+            historyRepository.save(changeHistory);
             client.setClientStatus(request.getStatus());
         }
         return clientRepository.save(client);
@@ -90,6 +132,13 @@ public class ClientService {
         if(!clientRepository.existsById(id)) {
             throw new RuntimeException("Client with this id does not exist");
         }
+
+        ChangeHistory changeHistory = new ChangeHistory();
+        changeHistory.setType(ChangeType.D);
+        changeHistory.setClientId(id);
+        changeHistory.setChangeDate(LocalDate.now());
+        historyRepository.save(changeHistory);
+
         clientRepository.deleteById(id);
     }
 }
