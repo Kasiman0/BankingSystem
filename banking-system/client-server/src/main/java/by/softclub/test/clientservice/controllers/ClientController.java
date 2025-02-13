@@ -50,11 +50,11 @@ public class ClientController {
     public String addClient(@RequestParam String email,
                             @RequestParam String username,
                             @RequestParam String telephone,
-                            //@RequestParam LocalDate birthDate,
+                            @RequestParam LocalDate birthDate,
                             //@RequestParam String passport_id,
                            // @RequestParam Registration registration,
                             Model model) {
-            clientService.addClient(email, username, telephone);
+            clientService.addClient(email, username, telephone, birthDate);
         return "redirect:/";
     }
 
