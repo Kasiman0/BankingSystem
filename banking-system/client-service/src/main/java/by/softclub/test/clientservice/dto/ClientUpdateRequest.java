@@ -1,23 +1,20 @@
 package by.softclub.test.clientservice.dto;
 
 import by.softclub.test.clientservice.entity.ClientStatus;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class ClientUpdateRequest {
 
-    @NotEmpty
+    @NotNull
     private long id;
 
-    @NotEmpty
     @Size(max = 50)
     private String fullName;
 
-    @NotEmpty
     @Size(max = 20)
     private String email;
 
-    @NotEmpty
     @Size(max = 13)
     private String phoneNumber;
 
