@@ -1,17 +1,16 @@
 services:
-  postgres:
+  postgres_client:
     container_name: client_server
     image: postgres:16
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DATA: /data/postgres
       POSTGRES_DB: clientService
     volumes:
-      - postgres:/data/postgres
+      - postgres_client:/var/lib/postgresql/data
     ports:
       - "4444:5432"
     restart: unless-stopped
 
 volumes:
-  postgres:
+  postgres_client:
