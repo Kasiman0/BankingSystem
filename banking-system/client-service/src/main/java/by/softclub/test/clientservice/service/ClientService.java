@@ -8,8 +8,8 @@ import by.softclub.test.clientservice.entity.Client;
 import by.softclub.test.clientservice.entity.ClientStatus;
 import by.softclub.test.clientservice.repository.ClientRepository;
 import by.softclub.test.clientservice.repository.HistoryRepository;
+import by.softclub.test.clientservice.security.EmailValidation;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +29,7 @@ public class ClientService {
 
     @Transactional
     public Client createClient(ClientCreateRequest request) {
+
         if (clientRepository.existsByPassportNumber(request.getPassportNumber())) {
             throw new RuntimeException("Client with this passport number already exists");
         }
@@ -38,6 +39,19 @@ public class ClientService {
         if (clientRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("Client with this email already exists");
         }
+        if(request.getPassportNumber().length()!=14){
+            throw new RuntimeException("Passport number length must be 14");
+        }
+        if(request.getPhoneNumber().length()!=13){
+            throw new RuntimeException("Phone number length must be 13");
+        }
+        if(!EmailValidation.isValid(request.getEmail())){
+            throw new RuntimeException("Invalid email address");
+        }
+        if(request.getPostalCode() != null && request.getPostalCode().length()!=6){
+            throw new RuntimeException("Postal code length must be 6");
+        }
+
         Client client = new Client();
         client.setFullName(request.getFullName());
         client.setDob(LocalDate.parse(request.getDob()));
@@ -48,6 +62,7 @@ public class ClientService {
         client.setAddress(request.getAddress());
         client.setClientStatus(ClientStatus.ACTIVE);
         client.setRegistrationDate(LocalDate.now());
+        clientRepository.save(client);
 
         ChangeHistory changeHistory = new ChangeHistory();
         changeHistory.setType(ChangeType.C);
@@ -55,7 +70,7 @@ public class ClientService {
         changeHistory.setChangeDate(client.getRegistrationDate());
         historyRepository.save(changeHistory);
 
-        return clientRepository.save(client);
+        return client;
     }
 
     public List<Client> getClients(String fullName, LocalDate dobFrom, LocalDate dobTo, String passportNumber,
