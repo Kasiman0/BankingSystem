@@ -2,12 +2,8 @@ package by.softclub.depositservice.service;
 
 import by.softclub.depositservice.dto.DepositCreateRequest;
 import by.softclub.depositservice.dto.DepositOperationRequest;
-import by.softclub.depositservice.entity.AgreementStatus;
-import by.softclub.depositservice.entity.Conditions;
-import by.softclub.depositservice.entity.Deposit;
-import by.softclub.depositservice.entity.Operations;
-import by.softclub.depositservice.repository.ConditionsRepository;
-import by.softclub.depositservice.repository.DepositRepository;
+import by.softclub.depositservice.entity.*;
+import by.softclub.depositservice.repository.*;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -20,10 +16,14 @@ import java.util.Objects;
 public class DepositService {
     private final DepositRepository depositRepository;
     private final ConditionsRepository conditionsRepository;
+    private final HistoryRepository historyRepository;
 
-    public DepositService(DepositRepository depositRepository, ConditionsRepository conditionsRepository) {
+    public DepositService(DepositRepository depositRepository,
+                          ConditionsRepository conditionsRepository,
+                          HistoryRepository historyRepository) {
         this.depositRepository = depositRepository;
         this.conditionsRepository = conditionsRepository;
+        this.historyRepository = historyRepository;
     }
 
     @Transactional
@@ -64,6 +64,13 @@ public class DepositService {
             throw new RuntimeException("Not enough funds to create a deposit");
         }
         depositRepository.save(deposit);
+
+        OperationHistory history = new OperationHistory();
+        history.setDepositId(deposit.getId());
+        history.setChangeType(ChangeType.C);
+        history.setOperationDate(LocalDate.now());
+        historyRepository.save(history);
+
         return deposit;
     }
 
@@ -90,6 +97,7 @@ public class DepositService {
     @Transactional
     public Deposit depositOperation(DepositOperationRequest request) {
         Deposit deposit = depositRepository.findById(request.getId());
+        OperationHistory history = new OperationHistory();
         switch (request.getOperation()) {
             case Operations.W:
                 if(!deposit.getWithdrawal()) {
@@ -102,6 +110,11 @@ public class DepositService {
                     throw new RuntimeException("Withdrawal exceeds minimal balance");
                 }
                 deposit.setAmount(deposit.getAmount() - request.getSum());
+
+                history.setOperation(Operations.W);
+                history.setSum(-request.getSum());
+                history.setNewBalance(deposit.getAmount());
+
                 break;
 
             case Operations.R:
@@ -112,6 +125,11 @@ public class DepositService {
                     throw new RuntimeException("Sum not provided");
                 }
                 deposit.setAmount(deposit.getAmount() + request.getSum());
+
+                history.setOperation(Operations.R);
+                history.setSum(request.getSum());
+                history.setNewBalance(deposit.getAmount());
+
                 break;
 
             case Operations.A:
@@ -119,6 +137,9 @@ public class DepositService {
                     throw new RuntimeException("Deposit is already active");
                 }
                 deposit.setStatus(AgreementStatus.ACTIVE);
+
+                history.setOperation(Operations.A);
+
                 break;
 
             case Operations.S:
@@ -126,13 +147,27 @@ public class DepositService {
                     throw new RuntimeException("Deposit is already suspended");
                 }
                 deposit.setStatus(AgreementStatus.SUSPENDED);
+
+                history.setOperation(Operations.S);
+
                 break;
 
             case Operations.C:
                 if(deposit.getStatus() == AgreementStatus.CLOSED) {
                     throw new RuntimeException("Deposit is already closed");
                 }
+                deposit.setStatus(AgreementStatus.CLOSED);
+
+                history.setOperation(Operations.C);
+
+                break;
         }
+
+        history.setDepositId(deposit.getId());
+        history.setChangeType(ChangeType.U);
+        history.setOperationDate(LocalDate.now());
+        historyRepository.save(history);
+
         return depositRepository.save(deposit);
     }
 
@@ -145,6 +180,13 @@ public class DepositService {
         if(deposit.getStatus()!=AgreementStatus.CLOSED) {
             throw new RuntimeException("Deposit is active or suspended");
         }
+
+        OperationHistory history = new OperationHistory();
+        history.setDepositId(id);
+        history.setChangeType(ChangeType.D);
+        history.setOperationDate(LocalDate.now());
+        historyRepository.save(history);
+
         depositRepository.deleteById(id);
     }
 }

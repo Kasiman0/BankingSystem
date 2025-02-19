@@ -22,8 +22,10 @@ ALTER TABLE deposits
 CREATE TABLE operation_history (
     id BIGSERIAL PRIMARY KEY,
     deposit_id INT NOT NULL,
-    type CHAR(1) NOT NULL,
+    change_type CHAR(1) NOT NULL,
+    operation CHAR(1),
     sum DOUBLE PRECISION,
+    new_balance DOUBLE PRECISION,
     operation_date DATE
 
 );
