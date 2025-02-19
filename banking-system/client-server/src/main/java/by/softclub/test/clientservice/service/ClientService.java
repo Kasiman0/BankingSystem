@@ -66,18 +66,4 @@ public class ClientService {
         clientRepository.save(client);
 
     }
-/*
-public void addClient(String email, String username, String telephone) {
-        //  ZoneId zone = ZoneId.of("Belarus/Minsk");
-        // LocalDate today = LocalDate.now(zone);
-        //  Statuses status = new Statuses(1);
-        Client client = new Client();
-        client.setUsername(username);
-        client.setEmail(email);
-        client.setTelephone(telephone);
-        //  client.setStatus(status);
-        clientRepository.save(client);
-
-}
- */
 }

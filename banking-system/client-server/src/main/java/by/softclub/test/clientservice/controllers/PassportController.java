@@ -1,6 +1,7 @@
 package by.softclub.test.clientservice.controllers;
 
 import by.softclub.test.clientservice.dto.ClientDto;
+import by.softclub.test.clientservice.dto.PassportDto;
 import by.softclub.test.clientservice.service.ClientService;
 import by.softclub.test.clientservice.service.PassportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,13 @@ public class PassportController {
     @Autowired
     private PassportService passportService;
 
+    @GetMapping(value = "/passports")
+    public String passports(Model model) {
+        Iterable<PassportDto> PassportDto = passportService.readAll();
+        model.addAttribute("Passport", PassportDto);
+        return "passports/listPassports";
+    }
+
     //  Вызов формы для ввода пользователя
     @GetMapping(value = "/add_passport")
     public String addPassport(Model model) {
@@ -28,11 +36,11 @@ public class PassportController {
 
     @PostMapping(value = "/add_passport")
     public String addPassport(@RequestParam String SeriesAndNumber,
-                              @RequestParam String issueDate,
                               @RequestParam String byWhomIssued,
-                              @RequestParam LocalDate unitCode,
+                              @RequestParam LocalDate issueDate,
+                              @RequestParam String unitCode,
                               Model model) {
-        passportService.addPassport(SeriesAndNumber, issueDate, byWhomIssued, unitCode);
+        passportService.addPassport(SeriesAndNumber, byWhomIssued, issueDate, unitCode);
         return "redirect:/";
     }
 }
