@@ -11,7 +11,7 @@ public class ConditionsUpdateRequest {
 
     private Boolean withdrawal;
 
-    private Float minBalance;
+    private Double minBalance;
 
     private Integer paymentFrequency;
 
@@ -22,7 +22,7 @@ public class ConditionsUpdateRequest {
 
     public Boolean getWithdrawal() { return withdrawal; }
 
-    public Float getMinBalance() { return minBalance; }
+    public Double getMinBalance() { return minBalance; }
 
     public Integer getPaymentFrequency() { return paymentFrequency; }
 }

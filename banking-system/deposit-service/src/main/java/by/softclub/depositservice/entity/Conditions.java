@@ -14,32 +14,31 @@ public class Conditions {
     private String agreementType;
 
     @Column
-    private boolean replenishment;
+    private Boolean replenishment;
 
     @Column
-    private boolean withdrawal;
+    private Boolean withdrawal;
 
-    @Column(name="minimal_balance")
-    private float minBalance;
+    @Column(name="min_balance")
+    private Double minBalance;
 
     @Column(name="payment_frequency")
-    private int paymentFrequency;
+    private Integer paymentFrequency;
 
     public int getId() {return id;}
-    public void setId(int id) {this.id = id;}
 
     public String getAgreementType() {return agreementType;}
     public void setAgreementType(String agreementType) {this.agreementType = agreementType;}
 
-    public boolean isReplenishment() {return replenishment;}
-    public void setReplenishment(boolean replenishment) {this.replenishment = replenishment;}
+    public Boolean getReplenishment() {return replenishment;}
+    public void setReplenishment(Boolean replenishment) {this.replenishment = replenishment;}
 
-    public boolean isWithdrawal() {return withdrawal;}
-    public void setWithdrawal(boolean withdrawal) {this.withdrawal = withdrawal;}
+    public Boolean getWithdrawal() {return withdrawal;}
+    public void setWithdrawal(Boolean withdrawal) {this.withdrawal = withdrawal;}
 
-    public float getMinBalance() {return minBalance;}
-    public void setMinBalance(float minBalance) {this.minBalance = minBalance;}
+    public Double getMinBalance() {return minBalance;}
+    public void setMinBalance(Double minBalance) {this.minBalance = minBalance;}
 
-    public int getPaymentFrequency() {return paymentFrequency;}
-    public void setPaymentFrequency(int paymentFrequency) {this.paymentFrequency = paymentFrequency;}
+    public Integer getPaymentFrequency() {return paymentFrequency;}
+    public void setPaymentFrequency(Integer paymentFrequency) {this.paymentFrequency = paymentFrequency;}
 }

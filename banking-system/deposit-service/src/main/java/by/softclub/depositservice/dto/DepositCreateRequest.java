@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 public class DepositCreateRequest {
 
     @NotEmpty
-    private long clientId;
+    private Long clientId;
 
     @NotEmpty
     @Size(max = 10)
@@ -17,36 +17,36 @@ public class DepositCreateRequest {
     private String agreementType;
 
     @NotEmpty
-    private double amount;
+    private Double amount;
 
     @NotEmpty
-    private float interestRate;
+    private Float interestRate;
 
     @NotEmpty
-    private int duration;
+    private Integer duration;
 
-    private boolean replenishment;
-    private boolean withdrawal;
-    private double minBalance;
-    private int paymentFrequency;
+    private Boolean replenishment;
+    private Boolean withdrawal;
+    private Double minBalance;
+    private Integer paymentFrequency;
 
-    public long getClientId() {return clientId;}
+    public Long getClientId() {return clientId;}
 
     public String getAgreementCode() {return agreementCode;}
 
     public String getAgreementType() {return agreementType;}
 
-    public double getAmount() {return amount;}
+    public Double getAmount() {return amount;}
 
-    public float getInterestRate() {return interestRate;}
+    public Float getInterestRate() {return interestRate;}
 
-    public int getDuration() {return duration;}
+    public Integer getDuration() {return duration;}
 
-    public boolean isReplenishment() {return replenishment;}
+    public Boolean getReplenishment() {return replenishment;}
 
-    public boolean isWithdrawal() {return withdrawal;}
+    public Boolean getWithdrawal() {return withdrawal;}
 
-    public double getMinBalance() {return minBalance;}
+    public Double getMinBalance() {return minBalance;}
 
-    public int getPaymentFrequency() {return paymentFrequency;}
+    public Integer getPaymentFrequency() {return paymentFrequency;}
 }

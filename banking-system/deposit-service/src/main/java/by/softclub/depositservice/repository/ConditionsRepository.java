@@ -10,13 +10,13 @@ import java.util.List;
 
 public interface ConditionsRepository extends JpaRepository<Conditions, Integer> {
     @Query("SELECT c FROM Conditions c WHERE" +
-            ":agreementType IS NULL OR c.agreementType LIKE (CONCAT('%', :agreementType, '%')) AND " +
-            ":replenishment IS NULL OR c.replenishment = :replenishment AND " +
-            ":withdrawal IS NULL OR c.withdrawal = :withdrawal AND " +
-            ":minBalanceFrom IS NULL OR c.minBalance >= :minBalanceFrom AND " +
-            ":minBalanceTo IS NULL OR c.minBalance <= :minBalanceTo AND " +
-            ":paymentFrequencyFrom IS NULL OR c.paymentFrequency >= :paymentFrequencyFrom AND " +
-            ":paymentFrequencyTo IS NULL OR c.paymentFrequency <= :paymentFrequencyTo")
+            "(:agreementType IS NULL OR c.agreementType LIKE CONCAT('%', :agreementType, '%')) AND " +
+            "(:replenishment IS NULL OR c.replenishment = :replenishment) AND " +
+            "(:withdrawal IS NULL OR c.withdrawal = :withdrawal) AND " +
+            "(:minBalanceFrom IS NULL OR c.minBalance >= :minBalanceFrom) AND " +
+            "(:minBalanceTo IS NULL OR c.minBalance <= :minBalanceTo) AND " +
+            "(:paymentFrequencyFrom IS NULL OR c.paymentFrequency >= :paymentFrequencyFrom) AND " +
+            "(:paymentFrequencyTo IS NULL OR c.paymentFrequency <= :paymentFrequencyTo)")
     List<Conditions> findByFilters(@Param("agreementType") String agreementType,
                                    @Param("replenishment") Boolean replenishment,
                                    @Param("withdrawal") Boolean withdrawal,
@@ -28,5 +28,7 @@ public interface ConditionsRepository extends JpaRepository<Conditions, Integer>
 
     Conditions findById(int id);
 
-    boolean existsByReplenishmentAndWithdrawalAndMinBalanceAndPaymentFrequency(boolean replenishment, boolean withdrawal, float minBalance, int paymentFrequency);
+    boolean existsByReplenishmentAndWithdrawalAndMinBalanceAndPaymentFrequency(Boolean replenishment, Boolean withdrawal, Double minBalance, Integer paymentFrequency);
+
+    Conditions findByAgreementType(String agreementType);
 }

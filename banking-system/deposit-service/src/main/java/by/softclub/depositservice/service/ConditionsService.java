@@ -19,8 +19,12 @@ public class ConditionsService {
 
     @Transactional
     public Conditions createConditions(ConditionsCreateRequest request) {
-        if(request.getMinBalance() < 0 || request.getMinBalance() > 1) {
+        if(request.getMinBalance() < 0 ) {
             throw new RuntimeException("Invalid min balance");
+        }
+        if(request.getPaymentFrequency() < 0)
+        {
+            throw new RuntimeException("Invalid payment frequency");
         }
         if(conditionsRepository.existsByReplenishmentAndWithdrawalAndMinBalanceAndPaymentFrequency(
                 request.isReplenishment(), request.isWithdrawal(), request.getMinBalance(), request.getPaymentFrequency())) {

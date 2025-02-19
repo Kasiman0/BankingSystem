@@ -10,24 +10,24 @@ public class ConditionsCreateRequest {
     private String agreementType;
 
     @NotEmpty
-    private boolean replenishment;
+    private Boolean replenishment;
 
     @NotEmpty
-    private boolean withdrawal;
+    private Boolean withdrawal;
 
     @NotEmpty
-    private float minBalance;
+    private Double minBalance;
 
     @NotEmpty
-    private int paymentFrequency;
+    private Integer paymentFrequency;
 
     public String getAgreementType() {return agreementType;}
 
-    public boolean isReplenishment() {return replenishment;}
+    public Boolean isReplenishment() {return replenishment;}
 
-    public boolean isWithdrawal() {return withdrawal;}
+    public Boolean isWithdrawal() {return withdrawal;}
 
-    public float getMinBalance() {return minBalance;}
+    public Double getMinBalance() {return minBalance;}
 
-    public int getPaymentFrequency() {return paymentFrequency;}
+    public Integer getPaymentFrequency() {return paymentFrequency;}
 }

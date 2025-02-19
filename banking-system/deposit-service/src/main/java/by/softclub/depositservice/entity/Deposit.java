@@ -13,7 +13,7 @@ public class Deposit {
     private long id;
 
     @Column(name="client_id")
-    private long clientId;
+    private Long clientId;
 
     @Column(name="agreement_code", length=10, nullable=false)
     private String agreementCode;
@@ -22,13 +22,13 @@ public class Deposit {
     private String agreementType;
 
     @Column(name="amount", nullable=false)
-    private double amount;
+    private Double amount;
 
     @Column(name="interest_rate", nullable=false)
-    private float interestRate;
+    private Float interestRate;
 
     @Column(name="duration")
-    private int duration;
+    private Integer duration;
 
     @Column(name="sign_date")
     private LocalDate signDate;
@@ -41,14 +41,55 @@ public class Deposit {
     private AgreementStatus status;
 
     @Column(name="replenishment")
-    private boolean replenishment;
+    private Boolean replenishment;
 
     @Column(name="withdrawal")
-    private boolean withdrawal;
+    private Boolean withdrawal;
 
-    @Column(name="minimal_balance")
-    private double minBalance;
+    @Column(name="min_balance")
+    private Double minBalance;
 
     @Column(name="payment_frequency")
-    private int paymentFrequency;
+    private Integer paymentFrequency;
+
+    public long getId() {return id;}
+
+    public Long getClientId() {return clientId;}
+    public void setClientId(Long clientId) {this.clientId = clientId;}
+
+    public String getAgreementCode() {return agreementCode;}
+    public void setAgreementCode(String agreementCode) {this.agreementCode = agreementCode;}
+
+    public String getAgreementType() {return agreementType;}
+    public void setAgreementType(String agreementType) {this.agreementType = agreementType;}
+
+    public Double getAmount() {return amount;}
+    public void setAmount(Double amount) {this.amount = amount;}
+
+    public Float getInterestRate() {return interestRate;}
+    public void setInterestRate(Float interestRate) {this.interestRate = interestRate;}
+
+    public Integer getDuration() {return duration;}
+    public void setDuration(Integer duration) {this.duration = duration;}
+
+    public LocalDate getSignDate() {return signDate;}
+    public void setSignDate(LocalDate signDate) {this.signDate = signDate;}
+
+    public LocalDate getEndDate() {return endDate;}
+    public void setEndDate(LocalDate endDate) {this.endDate = endDate;}
+
+    public AgreementStatus getStatus() {return status;}
+    public void setStatus(AgreementStatus status) {this.status = status;}
+
+    public Boolean getReplenishment() {return replenishment;}
+    public void setReplenishment(Boolean replenishment) {this.replenishment = replenishment;}
+
+    public Boolean getWithdrawal() {return withdrawal;}
+    public void setWithdrawal(Boolean withdrawal) {this.withdrawal = withdrawal;}
+
+    public Double getMinBalance() {return minBalance;}
+    public void setMinBalance(Double minBalance) {this.minBalance = minBalance;}
+
+    public Integer getPaymentFrequency() {return paymentFrequency;}
+    public void setPaymentFrequency(Integer paymentFrequency) {this.paymentFrequency = paymentFrequency;}
 }

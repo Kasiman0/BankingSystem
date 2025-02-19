@@ -37,7 +37,7 @@ CREATE TABLE agreement_conditions (
     agreement_type VARCHAR(10) NOT NULL UNIQUE,
     replenishment BOOLEAN,
     withdrawal BOOLEAN,
-    min_sum FLOAT,
+    min_balance DOUBLE PRECISION,
     payment_frequency INT
 );
 
