@@ -12,7 +12,7 @@ public class PassportMapper {
         //TODO check
         PassportDto dto = new PassportDto();
         dto.setId(passport.getId());
-        dto.setSeriesAndNumber(passport.getSeriesAndNumber());
+        dto.setNumber(passport.getNumber());
         dto.setIssueDate(passport.getIssueDate());
         dto.setByWhomIssued(passport.getByWhomIssued());
         dto.setUnitCode(passport.getUnitCode());
@@ -24,7 +24,7 @@ public class PassportMapper {
 //TODO check
         Passport passport=new Passport();
         passport.setId(dto.getId());
-        passport.setSeriesAndNumber(dto.getSeriesAndNumber());
+        passport.setNumber(dto.getNumber());
         passport.setIssueDate(dto.getIssueDate());
         passport.setByWhomIssued(dto.getByWhomIssued());
         passport.setUnitCode(dto.getUnitCode());

@@ -1,7 +1,6 @@
 package by.softclub.test.clientservice.service;
 
 import by.softclub.test.clientservice.dto.PassportDto;
-import by.softclub.test.clientservice.models.Client;
 import by.softclub.test.clientservice.models.Passport;
 import by.softclub.test.clientservice.repo.PassportRepository;
 import by.softclub.test.clientservice.utils.PassportMapper;
@@ -21,7 +20,7 @@ public class PassportService {
 
     @Autowired
     private PassportMapper clientMapper;
-    private String SeriesAndNumber;
+    private String number;
     private String byWhomIssued;
     private LocalDate issueDate;
     private String unitCode;
@@ -34,9 +33,9 @@ public class PassportService {
                 .collect(Collectors.toList());
     }
 
-    public String getBySeriesAndNumber(String SeriesAndNumber) {
-        Passport passport = passportRepository.findBySeriesAndNumber(SeriesAndNumber);
-        return SeriesAndNumber;
+    public Passport getByNumber(String number) {
+        Passport passport = passportRepository.findByNumber(number);
+        return passport;
 
     }
 
@@ -45,18 +44,18 @@ public class PassportService {
         addPassport((String) null, (String) null, (LocalDate) null, (String) null);
     }
 
-    public void addPassport(String SeriesAndNumber, String byWhomIssued, LocalDate issueDate, String unitCode) {
-        this.SeriesAndNumber = SeriesAndNumber;
+    public void addPassport(String number, String byWhomIssued, LocalDate issueDate, String unitCode) {
+        this.number = number;
         this.byWhomIssued = byWhomIssued;
         this.issueDate = issueDate;
         this.unitCode = unitCode;
         ZoneId zone = ZoneId.of("Europe/Minsk");
         LocalDate today = LocalDate.now(zone);
         Passport passport = new Passport();
-        passport.setSeriesAndNumber(SeriesAndNumber);
+        passport.setNumber(number);
         passport.setByWhomIssued(byWhomIssued);
         passport.setIssueDate(issueDate);
         passport.setUnitCode(unitCode);
-
+        passportRepository.save(passport);
     }
 }

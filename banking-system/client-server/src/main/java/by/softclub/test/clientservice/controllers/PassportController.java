@@ -35,12 +35,12 @@ public class PassportController {
     }
 
     @PostMapping(value = "/add_passport")
-    public String addPassport(@RequestParam String SeriesAndNumber,
+    public String addPassport(@RequestParam String Number,
                               @RequestParam String byWhomIssued,
                               @RequestParam LocalDate issueDate,
                               @RequestParam String unitCode,
                               Model model) {
-        passportService.addPassport(SeriesAndNumber, byWhomIssued, issueDate, unitCode);
+        passportService.addPassport(Number, byWhomIssued, issueDate, unitCode);
         return "redirect:/";
     }
 }

@@ -14,7 +14,7 @@ public class Passport {
     @Column(name = "id", nullable = false)
     private Long id;
     @Column(name = "series_and_number")
-    private String SeriesAndNumber;
+    private String number;
     @Column(name = "issue_date")
     private LocalDate issueDate;
     @Column(name = "by_whom_issued")
