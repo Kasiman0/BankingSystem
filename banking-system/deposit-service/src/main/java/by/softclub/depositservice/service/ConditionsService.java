@@ -22,13 +22,17 @@ public class ConditionsService {
         if(request.getMinBalance() < 0 ) {
             throw new RuntimeException("Invalid min balance");
         }
-        if(request.getPaymentFrequency() < 0)
+        if(request.getPaymentFrequency() <= 0)
         {
             throw new RuntimeException("Invalid payment frequency");
         }
         if(conditionsRepository.existsByReplenishmentAndWithdrawalAndMinBalanceAndPaymentFrequency(
                 request.isReplenishment(), request.isWithdrawal(), request.getMinBalance(), request.getPaymentFrequency())) {
             throw new RuntimeException("A template with these conditions already exists");
+        }
+        if(request.isReplenishment() == null && request.isWithdrawal() == null &&
+                request.getMinBalance() == null && request.getPaymentFrequency() == null) {
+            throw new RuntimeException("At least one condition is required");
         }
 
         Conditions conditions = new Conditions();
@@ -79,6 +83,9 @@ public class ConditionsService {
     public void deleteConditions(int id) {
         if(!conditionsRepository.existsById(id)) {
             throw new RuntimeException("Conditions template with this id does not exist");
+        }
+        if(id == 1) {
+            throw new RuntimeException("Cannot delete CUSTOM conditions");
         }
         conditionsRepository.deleteById(id);
     }

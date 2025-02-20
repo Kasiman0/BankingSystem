@@ -1,6 +1,7 @@
 package by.softclub.depositservice.dto;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class ConditionsCreateRequest {
@@ -9,16 +10,16 @@ public class ConditionsCreateRequest {
     @Size(max = 10)
     private String agreementType;
 
-    @NotEmpty
+    @NotNull
     private Boolean replenishment;
 
-    @NotEmpty
+    @NotNull
     private Boolean withdrawal;
 
-    @NotEmpty
+    @NotNull
     private Double minBalance;
 
-    @NotEmpty
+    @NotNull
     private Integer paymentFrequency;
 
     public String getAgreementType() {return agreementType;}

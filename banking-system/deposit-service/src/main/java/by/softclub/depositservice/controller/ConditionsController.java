@@ -5,7 +5,6 @@ import by.softclub.depositservice.dto.ConditionsUpdateRequest;
 import by.softclub.depositservice.entity.Conditions;
 import by.softclub.depositservice.service.ConditionsService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/depositConditions")
+@RequestMapping("/api/conditions")
 @Tag(name="DepositConditions", description = "API for managing conditions of typical deposit agreements")
 @SecurityRequirement(name="basicAuth")
 public class ConditionsController {
@@ -57,7 +56,7 @@ public class ConditionsController {
             summary = "Update",
             description = "Обновляет запись в таблице по id, изменяя указанные поля"
     )
-    @PostMapping
+    @PostMapping("/update")
     public ResponseEntity<Conditions> updateConditions(@Valid @RequestBody ConditionsUpdateRequest request) {
         return ResponseEntity.ok(conditionsService.updateConditions(request));
     }

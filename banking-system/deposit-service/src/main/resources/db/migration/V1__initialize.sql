@@ -31,8 +31,12 @@ CREATE TABLE operation_history (
 );
 
 ALTER TABLE operation_history
+    ADD CONSTRAINT types
+        CHECK ( change_type in ('C', 'U', 'D') );
+
+ALTER TABLE operation_history
     ADD CONSTRAINT operations
-        CHECK ( type in ('W', 'R', 'A', 'S', 'C') );
+        CHECK ( operation in ('W', 'R', 'A', 'S', 'C') );
 
 CREATE TABLE agreement_conditions (
     id BIGSERIAL PRIMARY KEY,

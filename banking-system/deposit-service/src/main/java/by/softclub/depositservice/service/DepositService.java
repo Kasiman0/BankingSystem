@@ -49,6 +49,9 @@ public class DepositService {
         deposit.setStatus(AgreementStatus.ACTIVE);
         if(!Objects.equals(deposit.getAgreementType(), "CUSTOM")) {
             Conditions conditions = conditionsRepository.findByAgreementType(deposit.getAgreementType());
+            if(conditions == null) {
+                throw new RuntimeException("Provided conditions do not exist");
+            }
             deposit.setReplenishment(conditions.getReplenishment());
             deposit.setWithdrawal(conditions.getWithdrawal());
             deposit.setMinBalance(conditions.getMinBalance());

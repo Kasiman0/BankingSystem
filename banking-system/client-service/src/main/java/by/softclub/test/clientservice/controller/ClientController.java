@@ -32,8 +32,7 @@ public class ClientController {
             description = "Создает и вносит нового клиента в бд"
     )
     @PostMapping("/new")
-    public ResponseEntity<Client> createClient(@Valid @RequestBody ClientCreateRequest request)
-    {
+    public ResponseEntity<Client> createClient(@Valid @RequestBody ClientCreateRequest request) {
         return ResponseEntity.ok(clientService.createClient(request));
     }
 
