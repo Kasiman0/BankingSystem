@@ -6,7 +6,7 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="passport")
+@Table(name= "passports")
 @Data
 public class Passport {
     @Id
@@ -15,10 +15,10 @@ public class Passport {
     private Long id;
     @Column(name = "series_and_number")
     private String number;
-    @Column(name = "issue_date")
-    private LocalDate issueDate;
     @Column(name = "by_whom_issued")
     private String byWhomIssued;
+    @Column(name = "issue_date")
+    private LocalDate issueDate;
     @Column(name = "unit_code")
     private String unitCode;
 }

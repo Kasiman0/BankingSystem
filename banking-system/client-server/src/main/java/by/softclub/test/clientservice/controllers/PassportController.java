@@ -22,19 +22,18 @@ public class PassportController {
 
     @GetMapping(value = "/passports")
     public String passports(Model model) {
-        Iterable<PassportDto> PassportDto = passportService.readAll();
-        model.addAttribute("Passport", PassportDto);
-        return "passports/listPassports";
+        Iterable<PassportDto> passportDto = passportService.readAll();
+        model.addAttribute("Passport", passportDto);
+        return "passports/listPassport";
     }
 
-    //  Вызов формы для ввода пользователя
     @GetMapping(value = "/add_passport")
     public String addPassport(Model model) {
-        model.addAttribute("title", "Добавить пасспорт");
-        return "addPassport";
+        model.addAttribute("title", "Добавить пользователя");
+        return "passports/addPassport";
     }
 
-    @PostMapping(value = "/add_passport")
+    @PostMapping(value = "passports/add_passport")
     public String addPassport(@RequestParam String Number,
                               @RequestParam String byWhomIssued,
                               @RequestParam LocalDate issueDate,

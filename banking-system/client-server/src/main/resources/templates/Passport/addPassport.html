@@ -10,45 +10,33 @@
 
 <body>
 
-<header th:insert="~{bloks/headerUT.html}"> </header>
+<header th:ins ert="~{bloks/headerUT.html}"> </header>
 
 </br>
 </br>
-<form action="/add_passport" method="post">
+<form action="passports/add_passport" method="post">
     <div class="form-group row">
-        <label for="inputEmail" class="col-sm-2 col-form-label">Адрес электронной почты</label>
+        <label for="inputNumber" class="col-sm-2 col-form-label">Серия и номер паспорта</label>
         <div class="col-sm-10">
-            <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email">
+            <input type="text" name="number" class="form-control" id="inputNumber" placeholder="Number">
         </div>
     </div>
     <div class="form-group row">
-        <label for="inputUserName" class="col-sm-2 col-form-label">Фамилия Имя Отчество</label>
+        <label for="inputByWhomIssued" class="col-sm-2 col-form-label">Кем выдан</label>
         <div class="col-sm-10">
-            <input type="text" name="username" class="form-control" id="inputUserName" placeholder="inputUserName">
+            <input type="text" name="byWhomIssued" class="form-control" id="inputByWhomIssued" placeholder="inputByWhomIssued">
         </div>
     </div>
     <div class="form-group row">
-        <label for="inputTelephone" class="col-sm-2 col-form-label">Телефон</label>
+        <label for="inputIssueDate" class="col-sm-2 col-form-label">Дата выдачи</label>
         <div class="col-sm-10">
-            <input type="tel" name="telephone" class="form-control" id="inputTelephone" placeholder="inputTelephone">
+            <input type="date" name="issueDate" class="form-control" id="inputIssueDate" placeholder="inputIssueDate">
         </div>
     </div>
     <div class="form-group row">
-        <label for="inputBirthDate" class="col-sm-2 col-form-label">Дата рождения</label>
+        <label for="inputUnitCode" class="col-sm-2 col-form-label">Идентификационный номер</label>
         <div class="col-sm-10">
-            <input type="date" name="birthDate" class="form-control" id="inputBirthDate" placeholder="inputBirthDate">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="inputPassportId" class="col-sm-2 col-form-label">Номер паспорта</label>
-        <div class="col-sm-10">
-            <input type="text" name="passport_id" class="form-control" id="inputPassportId" placeholder="inputPassportId">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="inputRegistration" class="col-sm-2 col-form-label">Регистрация</label>
-        <div class="col-sm-10">
-            <input type="text" name="" class="form-control" id="inputRegistration" placeholder="inputRegistration">
+            <input type="text" name="unitCode" class="form-control" id="inputUnitCode" placeholder="inputUnitCode">
         </div>
     </div>
     <div class="form-group row">
