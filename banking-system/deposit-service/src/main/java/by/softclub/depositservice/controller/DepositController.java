@@ -6,7 +6,6 @@ import by.softclub.depositservice.entity.AgreementStatus;
 import by.softclub.depositservice.entity.Deposit;
 import by.softclub.depositservice.service.DepositService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -61,7 +60,7 @@ public class DepositController {
             @RequestParam(required = false) Double minBalanceTo,
             @RequestParam(required = false) Integer paymentFrequencyFrom,
             @RequestParam(required = false) Integer paymentFrequencyTo,
-            @RequestParam(defaultValue = "fullName") String sortBy,
+            @RequestParam(defaultValue = "agreementCode") String sortBy,
             @RequestParam(defaultValue = "ASC") String sortDirection
             ) {
         return ResponseEntity.ok(depositService.getDeposits(clientId,
@@ -86,7 +85,7 @@ public class DepositController {
             description = "Удаляет депозит если его статус CLOSED"
     )
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteDeposit(@RequestParam long id) {
+    public ResponseEntity<Void> deleteDeposit(@PathVariable long id) {
         depositService.deleteDeposit(id);
         return ResponseEntity.ok().build();
     }

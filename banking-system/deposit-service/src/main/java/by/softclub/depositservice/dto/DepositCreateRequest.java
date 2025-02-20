@@ -1,11 +1,12 @@
 package by.softclub.depositservice.dto;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class DepositCreateRequest {
 
-    @NotEmpty
+    @NotNull
     private Long clientId;
 
     @NotEmpty
@@ -16,13 +17,13 @@ public class DepositCreateRequest {
     @Size(max = 10)
     private String agreementType;
 
-    @NotEmpty
+    @NotNull
     private Double amount;
 
-    @NotEmpty
+    @NotNull
     private Float interestRate;
 
-    @NotEmpty
+    @NotNull
     private Integer duration;
 
     private Boolean replenishment;

@@ -19,7 +19,7 @@ public class OperationHistory {
     private ChangeType changeType;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "type", length = 1)
+    @Column(name = "operation", length = 1)
     private Operations operation;
 
     @Column(name = "sum")

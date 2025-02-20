@@ -56,4 +56,6 @@ public interface DepositRepository extends JpaRepository<Deposit, Long> {
                                 Sort sort);
 
     Deposit findById(long id);
+
+    boolean existsByAgreementCode(String agreementCode);
 }

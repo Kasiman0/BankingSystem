@@ -1,14 +1,14 @@
 package by.softclub.depositservice.dto;
 
 import by.softclub.depositservice.entity.Operations;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 public class DepositOperationRequest {
 
-    @NotEmpty
+    @NotNull
     private long id;
 
-    @NotEmpty
+    @NotNull
     private Operations operation;
 
     private Double sum;

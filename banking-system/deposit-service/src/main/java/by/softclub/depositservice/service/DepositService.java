@@ -28,13 +28,20 @@ public class DepositService {
 
     @Transactional
     public Deposit createDeposit(DepositCreateRequest request) {
+        if(depositRepository.existsByAgreementCode(request.getAgreementCode())) {
+            throw new RuntimeException("Deposit with this code already exists");
+        }
         if(Objects.equals(request.getAgreementType(), "CUSTOM")) {
             if(request.getReplenishment() == null || request.getWithdrawal() == null ||
                     request.getMinBalance() == null || request.getPaymentFrequency() == null) {
                 throw new RuntimeException("Custom agreement conditions not provided");
             }
-            if(request.getMinBalance()<0 || request.getMinBalance()>1) {
-                throw new RuntimeException("Min balance should be between 0 and 1");
+            if(request.getMinBalance() < 0 ) {
+                throw new RuntimeException("Invalid min balance");
+            }
+            if(request.getPaymentFrequency() <= 0)
+            {
+                throw new RuntimeException("Invalid payment frequency");
             }
         }
         Deposit deposit = new Deposit();
