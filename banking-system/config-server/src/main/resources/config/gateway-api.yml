@@ -10,9 +10,13 @@ spring:
           lowerCaseServiceId: true
       routes:
         - id: client-service
-          uri: lb://CLIENT-SERVICE  # lb:// означает использование Load Balancer
+          uri: lb://client-service  # lb:// означает использование Load Balancer
           predicates:
             - Path=/api/clients/**
+        - id: deposit-service
+          uri: lb://deposit-service
+          predicates:
+              - Path=/api/deposits/**
 
 management:
   endpoint:

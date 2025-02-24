@@ -1,12 +1,14 @@
 package by.softclub.depositservice.service;
 
 import by.softclub.depositservice.dto.DepositCreateRequest;
+import by.softclub.depositservice.dto.DepositInformationResponse;
 import by.softclub.depositservice.dto.DepositOperationRequest;
 import by.softclub.depositservice.entity.*;
 import by.softclub.depositservice.repository.*;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,17 +19,23 @@ public class DepositService {
     private final DepositRepository depositRepository;
     private final ConditionsRepository conditionsRepository;
     private final HistoryRepository historyRepository;
+    private final RestTemplate restTemplate;
 
     public DepositService(DepositRepository depositRepository,
                           ConditionsRepository conditionsRepository,
-                          HistoryRepository historyRepository) {
+                          HistoryRepository historyRepository,
+                          RestTemplate restTemplate) {
         this.depositRepository = depositRepository;
         this.conditionsRepository = conditionsRepository;
         this.historyRepository = historyRepository;
+        this.restTemplate = restTemplate;
     }
 
     @Transactional
     public Deposit createDeposit(DepositCreateRequest request) {
+        if(Boolean.FALSE.equals(restTemplate.getForObject("http://client-service/api/clients/check/" + request.getClientId(), Boolean.class))) {
+            throw new RuntimeException("Client is not eligible for deposit");
+        }
         if(depositRepository.existsByAgreementCode(request.getAgreementCode())) {
             throw new RuntimeException("Deposit with this code already exists");
         }
@@ -198,5 +206,23 @@ public class DepositService {
         historyRepository.save(history);
 
         depositRepository.deleteById(id);
+    }
+
+    public Double getValue(long id) {
+        if(!depositRepository.existsById(id)) {
+            throw new RuntimeException("Deposit does not exist");
+        }
+        Deposit deposit = depositRepository.findById(id);
+        return deposit.getAmount() * Math.pow(1 + (deposit.getInterestRate()/12),(deposit.getDuration()));
+    }
+
+    public DepositInformationResponse getInformation(long id) {
+        if(!depositRepository.existsById(id)) {
+            throw new RuntimeException("Deposit does not exist");
+        }
+        Deposit deposit = depositRepository.findById(id);
+        Object client = restTemplate.getForObject("http://client-service/api/clients/" + deposit.getClientId(), Object.class);
+        List<OperationHistory> history = historyRepository.findById(id);
+        return new DepositInformationResponse(deposit, client, history);
     }
 }

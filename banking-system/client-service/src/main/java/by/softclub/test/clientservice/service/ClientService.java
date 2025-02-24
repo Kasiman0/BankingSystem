@@ -156,4 +156,18 @@ public class ClientService {
 
         clientRepository.deleteById(id);
     }
+
+    public Boolean checkClient(long id) {
+        if(!clientRepository.existsById(id)) {
+            return false;
+        }
+
+        Client client = clientRepository.findById(id);
+
+        return client.getClientStatus() == ClientStatus.ACTIVE;
+    }
+
+    public Client getById(long id) {
+        return clientRepository.findById(id);
+    }
 }

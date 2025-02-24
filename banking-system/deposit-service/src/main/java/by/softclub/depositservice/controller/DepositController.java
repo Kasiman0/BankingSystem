@@ -1,6 +1,7 @@
 package by.softclub.depositservice.controller;
 
 import by.softclub.depositservice.dto.DepositCreateRequest;
+import by.softclub.depositservice.dto.DepositInformationResponse;
 import by.softclub.depositservice.dto.DepositOperationRequest;
 import by.softclub.depositservice.entity.AgreementStatus;
 import by.softclub.depositservice.entity.Deposit;
@@ -88,5 +89,23 @@ public class DepositController {
     public ResponseEntity<Void> deleteDeposit(@PathVariable long id) {
         depositService.deleteDeposit(id);
         return ResponseEntity.ok().build();
+    }
+
+    @Operation(
+            summary = "Interest calculation",
+            description = "Returns ending balance for a deposit using compound interest formula"
+    )
+    @GetMapping("/calculate/{id}")
+    public ResponseEntity<Double> getValue(@PathVariable long id) {
+        return ResponseEntity.ok(depositService.getValue(id));
+    }
+
+    @Operation(
+            summary = "deposit information",
+            description = "returns info on the deposit, its owner and operation history"
+    )
+    @GetMapping("/info/{id}")
+    public ResponseEntity<DepositInformationResponse> getInformation(@PathVariable long id) {
+        return ResponseEntity.ok(depositService.getInformation(id));
     }
 }

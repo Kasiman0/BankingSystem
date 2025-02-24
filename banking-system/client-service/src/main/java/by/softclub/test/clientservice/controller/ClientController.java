@@ -74,4 +74,22 @@ public class ClientController {
         clientService.deleteClient(id);
         return ResponseEntity.ok().build();
     }
+
+    @Operation(
+            summary = "Status check",
+            description = "Проверяет существование и статус клиента"
+    )
+    @GetMapping("/check/{id}")
+    public ResponseEntity<Boolean> checkClient(@PathVariable long id){
+        return ResponseEntity.ok(clientService.checkClient(id));
+    }
+
+    @Operation(
+            summary = "get client",
+            description = "get client by id"
+    )
+    @GetMapping("/{id}")
+    public ResponseEntity<Client> getById(@PathVariable long id){
+        return ResponseEntity.ok(clientService.getById(id));
+    }
 }
