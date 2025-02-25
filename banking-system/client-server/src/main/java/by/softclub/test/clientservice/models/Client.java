@@ -44,7 +44,6 @@ public class Client {
     @JoinColumn(name = "status_id")
     private Statuses status;
 
-
     @Column(name = "registration_date")
     private LocalDate registrationDate;
 

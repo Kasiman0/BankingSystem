@@ -20,26 +20,26 @@ public class PassportController {
     @Autowired
     private PassportService passportService;
 
-    @GetMapping(value = "/passports")
+    @GetMapping(value = "/passport")
     public String passports(Model model) {
         Iterable<PassportDto> passportDto = passportService.readAll();
         model.addAttribute("Passport", passportDto);
-        return "passports/listPassport";
+        return "passport/listPassport";
     }
 
     @GetMapping(value = "/add_passport")
     public String addPassport(Model model) {
         model.addAttribute("title", "Добавить пользователя");
-        return "passports/addPassport";
+        return "passport/addPassport";
     }
 
-    @PostMapping(value = "passports/add_passport")
-    public String addPassport(@RequestParam String Number,
+    @PostMapping(value = "/add_passport")
+    public String addPassport(@RequestParam String number,
                               @RequestParam String byWhomIssued,
                               @RequestParam LocalDate issueDate,
                               @RequestParam String unitCode,
                               Model model) {
-        passportService.addPassport(Number, byWhomIssued, issueDate, unitCode);
+        passportService.addPassport(number, byWhomIssued, issueDate, unitCode);
         return "redirect:/";
     }
 }
