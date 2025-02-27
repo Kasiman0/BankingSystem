@@ -14,4 +14,5 @@ public class ClientDto {
     private String email;
     private LocalDate dateLast;
     private Statuses status;
+    private String passportSeriesAndNumber;
 }

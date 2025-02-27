@@ -44,12 +44,7 @@ public class ClientService {
         clientRepository.delete(client);
     }
 
-
-    public void addClient() {
-        addClient((String) null, (String) null, (String) null, (LocalDate) null);
-    }
-
-    public void addClient(String username, String email, String telephone, LocalDate birthDate) {
+    public void addClient(String username, String email, String telephone, LocalDate birthDate, String passportSeriesAndNumber) {
         this.username = username;
         this.email = email;
         this.telephone = telephone;
@@ -59,10 +54,9 @@ public class ClientService {
         client.setRegistrationDate(today);
         client.setUsername(username);
         client.setBday(birthDate);
-        //client.setPassport_id(Long.valueOf(passport_id));
         client.setEmail(email);
         client.setTelephone(telephone);
-        //client.setRegistration(registration);
+        client.setPassportSeriesAndNumber(passportSeriesAndNumber);
         clientRepository.save(client);
 
     }

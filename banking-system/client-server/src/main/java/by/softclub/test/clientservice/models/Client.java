@@ -27,7 +27,7 @@ public class Client {
     @Column(name = "username") //Имя, Фамилия, Отчество
     private String username;
 
-    @Column(name = "Bday") //Дата рождения
+    @Column(name = "bday") //Дата рождения
     private LocalDate bday;
 
     @Column(name = "email")
@@ -37,14 +37,13 @@ public class Client {
     private String telephone;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "registration_id")
-    private Registration registration;
-
-    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "status_id")
     private Statuses status;
 
     @Column(name = "registration_date")
     private LocalDate registrationDate;
+
+    @Column(name = "passport_series_and_number")
+    private String passportSeriesAndNumber;
 
 }

@@ -15,6 +15,7 @@ public class ClientMapper {
         dto.setUsername(client.getUsername());
         dto.setEmail(client.getEmail());
         dto.setTelephone(client.getTelephone());
+        dto.setPassportSeriesAndNumber(client.getPassportSeriesAndNumber());
        // dto.setStatus(client.getStatus());
         return dto;
     }
@@ -27,6 +28,7 @@ public class ClientMapper {
         client.setUsername(dto.getUsername());
         client.setEmail(dto.getEmail());
         client.setTelephone(dto.getTelephone());
+        client.setPassportSeriesAndNumber(dto.getPassportSeriesAndNumber());
         //  client.setStatus(dto.getStatus());
         return client;
     }
