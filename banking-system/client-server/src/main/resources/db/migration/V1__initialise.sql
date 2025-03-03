@@ -59,3 +59,15 @@ ALTER TABLE clients
 
 ALTER TABLE clients
     ADD CONSTRAINT fkhkwx4rqq73nbdb09dqac9am4g FOREIGN KEY (registration_id) REFERENCES registration (id) ON DELETE NO ACTION;
+
+alter table passport drop column id;
+alter table passport add constraint passport_pk primary key (series_and_number);
+alter table clients add constraint clients_passport foreign key (passport_series_and_number) references passport (series_and_number) on delete no action;
+
+alter table clients drop column status_id;
+alter table clients add column status_name varchar;
+alter table status drop column id;
+alter table status add constraint status_pkey primary key (name);
+alter table clients add constraint clients_status foreign key (status_name) references status (name) on delete no action;
+
+alter table clients rename status_name to status_id;

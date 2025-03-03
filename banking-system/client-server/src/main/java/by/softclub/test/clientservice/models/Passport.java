@@ -10,9 +10,6 @@ import java.time.LocalDate;
 @Data
 public class Passport {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
     @Column(name = "series_and_number")
     private String number;
     @Column(name = "by_whom_issued")

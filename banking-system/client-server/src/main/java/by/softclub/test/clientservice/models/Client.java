@@ -5,11 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 
 
 @Entity
@@ -37,7 +33,7 @@ public class Client {
     private String telephone;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "status_id")
+    @JoinColumn(name = "status_id", nullable = false, columnDefinition = "Status DEFAULT 'ACTIVE'")
     private Statuses status;
 
     @Column(name = "registration_date")
