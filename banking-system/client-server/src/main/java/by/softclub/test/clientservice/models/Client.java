@@ -33,7 +33,7 @@ public class Client {
     private String telephone;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "status_id", nullable = false, columnDefinition = "Status DEFAULT 'ACTIVE'")
+    @JoinColumn(name = "status_id", nullable = false, columnDefinition = "ACTIVE")
     private Statuses status;
 
     @Column(name = "registration_date")

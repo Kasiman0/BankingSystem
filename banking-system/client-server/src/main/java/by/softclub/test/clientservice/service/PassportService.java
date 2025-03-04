@@ -19,7 +19,7 @@ public class PassportService {
     private PassportRepository passportRepository;
 
     @Autowired
-    private PassportMapper clientMapper;
+    private PassportMapper passportMapper;
     private String number;
     private String byWhomIssued;
     private LocalDate issueDate;
@@ -36,7 +36,6 @@ public class PassportService {
     public Passport getByNumber(String number) {
         Passport passport = passportRepository.findByNumber(number);
         return passport;
-
     }
 
 
