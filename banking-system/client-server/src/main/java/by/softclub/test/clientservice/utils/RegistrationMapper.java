@@ -2,7 +2,9 @@ package by.softclub.test.clientservice.utils;
 
 import by.softclub.test.clientservice.dto.RegistrationDto;
 import by.softclub.test.clientservice.models.Registration;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RegistrationMapper {
     public static RegistrationDto mapToRegistrationDto(Registration registration)
     {
