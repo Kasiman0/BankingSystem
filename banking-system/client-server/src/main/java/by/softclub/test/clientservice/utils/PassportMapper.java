@@ -9,7 +9,6 @@ public class PassportMapper {
 
     public static PassportDto mapToPassportDto(Passport passport)
     {
-        //TODO check
         PassportDto dto = new PassportDto();
         dto.setNumber(passport.getNumber());
         dto.setIssueDate(passport.getIssueDate());
@@ -20,7 +19,6 @@ public class PassportMapper {
 
     public Passport mapToPassport(PassportDto dto)
     {
-//TODO check
         Passport passport=new Passport();
         passport.setNumber(dto.getNumber());
         passport.setIssueDate(dto.getIssueDate());

@@ -11,7 +11,7 @@ public class Registration {
     @Column(name = "id", nullable = false)
     private Long id;
     @Column(name = "zip")
-    private int zip;
+    private Integer zip;
     @Column(name = "region")
     private String region;
     @Column(name = "city")

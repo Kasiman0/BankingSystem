@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 public class RegistrationMapper {
     public static RegistrationDto mapToRegistrationDto(Registration registration)
     {
-        //TODO check
         RegistrationDto dto = new RegistrationDto();
         dto.setId(registration.getId());
         dto.setCity(registration.getCity());
@@ -20,7 +19,6 @@ public class RegistrationMapper {
 
     public Registration mapToRegistration(RegistrationDto dto)
     {
-//TODO check
         Registration registration = new Registration();
         registration.setId(dto.getId());
         registration.setCity(dto.getCity());

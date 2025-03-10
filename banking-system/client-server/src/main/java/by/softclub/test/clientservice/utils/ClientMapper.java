@@ -9,7 +9,6 @@ public class ClientMapper {
 
     public ClientDto mapToClientDto(Client client)
     {
-        //TODO check
         ClientDto dto = new ClientDto();
         dto.setId(client.getId());
         dto.setUsername(client.getUsername());
@@ -22,7 +21,6 @@ public class ClientMapper {
 
     public Client mapToClient(ClientDto dto)
     {
-//TODO check
         Client client=new Client();
         client.setId(dto.getId());
         client.setUsername(dto.getUsername());
